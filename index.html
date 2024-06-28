@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intégration de Vidéo avec Sous-titres</title>
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.6.8/plyr.css" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .video-container {
+            width: 80%;
+            max-width: 800px;
+        }
+        .input-container {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .input-container input {
+            width: 100%;
+            max-width: 400px;
+            padding: 10px;
+            margin: 5px 0;
+        }
+        .input-container button {
+            padding: 10px 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="input-container">
+        <h2>Entrez l'URL de la vidéo Odysee et l'URL du fichier de sous-titres</h2>
+        <input type="text" id="videoUrl" placeholder="URL de la vidéo Odysee" />
+        <input type="text" id="subtitleUrl" placeholder="URL du fichier de sous-titres (.vtt)" />
+        <button onclick="loadVideo()">Charger la vidéo</button>
+    </div>
+    <div class="video-container">
+        <video id="player" playsinline controls>
+            <source id="videoSource" type="video/mp4" />
+            <track id="videoTrack" kind="subtitles" label="French" srclang="fr" default />
+        </video>
+    </div>
+    <script src="https://cdn.plyr.io/3.6.8/plyr.polyfilled.js"></script>
+    <script>
+        const player = new Plyr('#player');
+
+        function loadVideo() {
+            const videoUrl = document.getElementById('videoUrl').value;
+            const subtitleUrl = document.getElementById('subtitleUrl').value;
+
+            if (videoUrl && subtitleUrl) {
+                document.getElementById('videoSource').src = videoUrl;
+                document.getElementById('videoTrack').src = subtitleUrl;
+                player.load();
+            } else {
+                alert('Veuillez entrer les URL de la vidéo et des sous-titres.');
+            }
+        }
+    </script>
+</body>
+</html>

@@ -37,7 +37,7 @@
 <body>
     <div class="input-container">
         <h2>Entrez l'URL de la vidéo Odysee et l'URL du fichier de sous-titres</h2>
-        <input type="text" id="videoUrl" placeholder="URL de la vidéo Odysee" value="https://odysee.com/$/embed/@Atichu:4/SMGTS1E32:a?r=3VoJH1tQ2CyHj4amoMvRm457jujmfPs6"/>
+        <input type="text" id="videoUrl" placeholder="URL de la vidéo Odysee" value="https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4"/>
         <input type="text" id="subtitleUrl" placeholder="URL du fichier de sous-titres (.vtt)" value="https://nephelim2018.github.io/testsite/shen.vtt"/>
         <button onclick="loadVideo()">Charger la vidéo</button>
     </div>
@@ -66,8 +66,27 @@
                 videoSource.src = videoUrl;
                 videoTrack.src = subtitleUrl;
 
-                videoElement.load();
+                videoElement.addEventListener('loadeddata', () => {
+                    console.log('Les données vidéo sont entièrement chargées.');
+                });
 
+                videoElement.addEventListener('error', (e) => {
+                    console.error('Erreur lors du chargement de la vidéo.', e);
+                });
+
+                videoElement.addEventListener('play', () => {
+                    console.log('Vidéo en cours de lecture.');
+                });
+
+                videoElement.addEventListener('pause', () => {
+                    console.log('Vidéo en pause.');
+                });
+
+                videoElement.addEventListener('ended', () => {
+                    console.log('Vidéo terminée.');
+                });
+
+                videoElement.load();
                 console.log("Vidéo et sous-titres chargés.");
             } else {
                 alert('Veuillez entrer les URL de la vidéo et des sous-titres.');

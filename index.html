@@ -40,29 +40,26 @@
 </head>
 <body>
     <div class="input-container">
-        <h2>Entrez l'URL de la vidéo Odysee et l'URL du fichier de sous-titres</h2>
+        <h2>Entrez l'URL de la vidéo Odysee</h2>
         <input type="text" id="videoUrl" placeholder="URL de la vidéo Odysee" value="https://odysee.com/$/embed/@Atichu:4/SMGTS1E32:a?r=3VoJH1tQ2CyHj4amoMvRm457jujmfPs6"/>
-        <input type="text" id="subtitleUrl" placeholder="URL du fichier de sous-titres (.vtt)" value="https://nephelim2018.github.io/testsite/shen.vtt"/>
         <button onclick="loadVideo()">Charger la vidéo</button>
     </div>
     <div class="video-container">
-        <iframe id="videoIframe"></iframe>
+        <iframe id="videoIframe" src=""></iframe>
     </div>
     <script>
         function loadVideo() {
             const videoUrl = document.getElementById('videoUrl').value;
-            const subtitleUrl = document.getElementById('subtitleUrl').value;
 
-            if (videoUrl && subtitleUrl) {
+            if (videoUrl) {
                 console.log("URL de la vidéo :", videoUrl);
-                console.log("URL du fichier de sous-titres :", subtitleUrl);
 
                 const iframe = document.getElementById('videoIframe');
                 iframe.src = videoUrl;
 
                 console.log("Vidéo chargée dans l'iframe.");
             } else {
-                alert('Veuillez entrer les URL de la vidéo et des sous-titres.');
+                alert('Veuillez entrer l\'URL de la vidéo.');
             }
         }
     </script>

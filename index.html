@@ -56,9 +56,21 @@
             const subtitleUrl = document.getElementById('subtitleUrl').value;
 
             if (videoUrl && subtitleUrl) {
-                document.getElementById('videoSource').src = videoUrl;
-                document.getElementById('videoTrack').src = subtitleUrl;
-                player.load();
+                console.log("URL de la vidéo :", videoUrl);
+                console.log("URL du fichier de sous-titres :", subtitleUrl);
+
+                const videoElement = document.getElementById('player');
+                const videoSource = document.getElementById('videoSource');
+                const videoTrack = document.getElementById('videoTrack');
+
+                videoSource.src = videoUrl;
+                videoTrack.src = subtitleUrl;
+
+                videoElement.load();
+                player.restart();  // Restart the player to apply changes
+                player.play();     // Optionally, play the video after loading
+
+                console.log("Vidéo et sous-titres chargés.");
             } else {
                 alert('Veuillez entrer les URL de la vidéo et des sous-titres.');
             }
